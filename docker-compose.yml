@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  db:
+    container_name: db
+    env_file:
+      - .dev.env
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=10"
+      - "-c"
+      - "max_parallel_workers_per_gather=10"
+      - "-c"
+      - "max_worker_processes=10"    
+      - "-c"
+      - "max_parallel_workers=10"        
+      - "-c"
+      - "shared_buffers=1GB"
+      - "-c"        
+    build:
+      context: postgresql/
+    volumes:
+      - pg_data:/var/lib/postgresql/data
